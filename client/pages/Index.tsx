@@ -4,8 +4,8 @@ const Index = () => {
   return (
     <div className="w-full max-w-[1440px] mx-auto bg-white font-['Inter'] text-sm">
       {/* Hero Section */}
-      <div className="relative w-full h-[586px] mt-20 px-6">
-        <div className="relative w-full max-w-[1392px] mx-auto h-[550px] rounded-3xl overflow-hidden">
+      <div className="relative w-full h-[400px] md:h-[586px] mt-10 md:mt-20 px-4 md:px-6">
+        <div className="relative w-full max-w-[1392px] mx-auto h-[350px] md:h-[550px] rounded-2xl md:rounded-3xl overflow-hidden">
           <img 
             src="https://api.builder.io/api/v1/image/assets/TEMP/0a4b4556ca6f5689dd9c83f8de922a969221bd3a?width=2784" 
             alt="Hero news image"
