@@ -13,21 +13,21 @@ const Index = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/85 rounded-3xl" />
           
-          <div className="absolute left-6 top-[150px] w-[calc(100%-48px)] max-w-[643px] z-10">
-            <div className="text-white font-bold text-base leading-normal mb-2">
+          <div className="absolute left-4 md:left-6 top-[80px] md:top-[150px] w-[calc(100%-32px)] md:w-[calc(100%-48px)] max-w-[643px] z-10">
+            <div className="text-white font-bold text-sm md:text-base leading-normal mb-1 md:mb-2">
               detikInet
             </div>
-            <div className="text-white text-sm font-normal leading-normal mb-6">
+            <div className="text-white text-xs md:text-sm font-normal leading-normal mb-3 md:mb-6">
               | 14 Mei 2022
             </div>
-            <h1 className="text-white text-2xl font-bold leading-normal mb-16 max-w-[586px]">
+            <h1 className="text-white text-lg md:text-2xl font-bold leading-tight md:leading-normal mb-8 md:mb-16 max-w-[586px]">
               LINE Today Tutup 6 Juli 2022, Mau Fokus di Fintech
             </h1>
-            <p className="text-white text-base leading-normal mb-4 max-w-[643px]">
+            <p className="text-white text-sm md:text-base leading-normal mb-2 md:mb-4 max-w-[643px] hidden md:block">
               <span className="font-bold">Jakarta - LINE</span>
               <span className="font-normal"> Today akan resmi ditutup pada 6 Juli 2022. Line Indonesia menyampaikan, langkah ini dilakukan sebagai bentuk....</span>
             </p>
-            <div className="text-white text-sm font-normal leading-normal">
+            <div className="text-white text-xs md:text-sm font-normal leading-normal">
               8 menit yang lalu
             </div>
           </div>
