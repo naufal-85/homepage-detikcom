@@ -78,8 +78,8 @@ const Index = () => {
             "https://api.builder.io/api/v1/image/assets/TEMP/7e889c679eb5a7a84c43a8bfa79e8d21d9243423?width=160",
             "https://api.builder.io/api/v1/image/assets/TEMP/e129cd518bd23863a4f9a0225e8b70d9cfc0ace1?width=160"
           ].map((src, index) => (
-            <div key={index} className="inline-flex p-2 px-3 justify-center items-center rounded-3xl bg-white shadow-sm border border-gray-100 min-w-[100px] h-8">
-              <img src={src} alt={`Category ${index + 1}`} className="w-[70px] h-[14px]" />
+            <div key={index} className="inline-flex p-1 md:p-2 px-2 md:px-3 justify-center items-center rounded-2xl md:rounded-3xl bg-white shadow-sm border border-gray-100 min-w-[80px] md:min-w-[100px] h-6 md:h-8 flex-shrink-0">
+              <img src={src} alt={`Category ${index + 1}`} className="w-[50px] md:w-[70px] h-[10px] md:h-[14px]" />
             </div>
           ))}
         </div>
