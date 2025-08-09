@@ -267,7 +267,7 @@ const Index = () => {
         {/* Right Sidebar */}
         <div className="w-full lg:w-[558px] lg:max-w-[558px] mt-8 lg:mt-0">
           {/* Sidebar News */}
-          <div className="space-y-4 mb-6">
+          <div className="space-y-4 mb-6 flex flex-col">
             <div className="flex gap-6">
               <img 
                 src="https://api.builder.io/api/v1/image/assets/TEMP/d0e5341ed8ddef68ff7d3ff9726c044b3743aba1?width=340" 
@@ -291,10 +291,10 @@ const Index = () => {
             <hr className="border-gray-300" />
             
             <div className="space-y-4">
-              <img 
-                src="https://api.builder.io/api/v1/image/assets/TEMP/494c9cd5772a37d5a732685bc67c8a306951c7f3?width=340" 
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/494c9cd5772a37d5a732685bc67c8a306951c7f3?width=340"
                 alt="Sidebar featured"
-                className="w-full h-[150px] rounded-lg object-cover"
+                className="w-full h-[200px] rounded-lg object-cover"
               />
               <div>
                 <h3 className="text-darkcolor text-lg font-semibold leading-6 mb-3">
