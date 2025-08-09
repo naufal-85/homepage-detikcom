@@ -260,7 +260,7 @@ const Index = () => {
         </div>
 
         {/* Right Sidebar */}
-        <div className="w-full max-w-[558px]">
+        <div className="w-full lg:w-[558px] lg:max-w-[558px] mt-8 lg:mt-0">
           {/* Sidebar News */}
           <div className="space-y-4 mb-6">
             <div className="flex gap-6">
