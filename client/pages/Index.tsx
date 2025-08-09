@@ -21,9 +21,11 @@ const Index = () => {
             <div className="text-white text-xs md:text-sm font-normal leading-normal mb-3 md:mb-6">
               | 14 Mei 2022
             </div>
-            <h1 className="text-white text-lg md:text-2xl font-bold leading-tight md:leading-normal mb-8 md:mb-16 max-w-[586px]">
-              LINE Today Tutup 6 Juli 2022, Mau Fokus di Fintech
-            </h1>
+            <Link to="/detail">
+              <h1 className="text-white text-lg md:text-2xl font-bold leading-tight md:leading-normal mb-8 md:mb-16 max-w-[586px] hover:underline cursor-pointer">
+                LINE Today Tutup 6 Juli 2022, Mau Fokus di Fintech
+              </h1>
+            </Link>
             <p className="text-white text-sm md:text-base leading-normal mb-2 md:mb-4 max-w-[643px] hidden md:block">
               <span className="font-bold">Jakarta - LINE</span>
               <span className="font-normal"> Today akan resmi ditutup pada 6 Juli 2022. Line Indonesia menyampaikan, langkah ini dilakukan sebagai bentuk....</span>
