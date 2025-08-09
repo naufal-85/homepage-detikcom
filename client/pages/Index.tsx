@@ -458,14 +458,13 @@ const Index = () => {
               }
             ].map((article, index) => (
               <div key={index}>
-                <div className="flex gap-6">
-                  <img 
-                    src={article.image} 
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                  <img
+                    src={article.image}
                     alt={article.title}
-                    className={index === 0 ? "w-[461px] h-[300px]" : "w-[267px] h-[157px]"} 
-                    style={{borderRadius: "8px", objectFit: "cover"}}
+                    className={`${index === 0 ? "w-full md:w-[461px] h-[200px] md:h-[300px]" : "w-full md:w-[267px] h-[180px] md:h-[157px]"} rounded-lg object-cover flex-shrink-0`}
                   />
-                  <div className={index === 0 ? "w-[340px] py-6" : "flex-1 py-4"}>
+                  <div className={index === 0 ? "w-full md:w-[340px] py-0 md:py-6" : "flex-1 py-0 md:py-4"}>
                     {article.source && (
                       <div className="flex items-center gap-1 mb-2">
                         <span className="text-textgray-light text-sm font-bold">{article.source}</span>
