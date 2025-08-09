@@ -124,7 +124,7 @@ const Index = () => {
         {/* Left Content */}
         <div className="flex-1 max-w-[825px]">
           {/* Featured Article */}
-          <div className="relative w-full h-[250px] rounded-lg overflow-hidden mb-10">
+          <div className="relative w-full h-[200px] md:h-[250px] rounded-lg overflow-hidden mb-8 md:mb-10">
             <img 
               src="https://api.builder.io/api/v1/image/assets/TEMP/16c08fd2a20844cd827209e693b5497204da5e34?width=1116" 
               alt="Featured article"
