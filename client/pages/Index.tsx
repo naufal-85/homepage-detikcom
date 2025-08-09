@@ -376,7 +376,7 @@ const Index = () => {
           </div>
 
           {/* Video Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-12">
             {[
               {
                 image: "https://api.builder.io/api/v1/image/assets/TEMP/4de8c80ca2ed7d464c79e0bf9c6e4d7b685a928d?width=534",
