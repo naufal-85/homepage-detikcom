@@ -331,64 +331,197 @@ const NewsDetail = () => {
 
           {/* Comments Section */}
           <div className="border-t border-gray-200 pt-8 mt-8">
-            <h3 className="text-darkcolor text-2xl font-bold mb-6">Komentar (23)</h3>
-            
-            {/* Comment Form */}
-            <div className="bg-gray-50 rounded-lg p-6 mb-6">
-              <h4 className="text-darkcolor font-semibold mb-4">Tulis Komentar</h4>
-              <textarea 
-                className="w-full h-24 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-detikblue focus:border-transparent"
-                placeholder="Bagikan pendapat Anda tentang berita ini..."
-              ></textarea>
-              <div className="flex justify-end mt-3">
-                <button className="px-6 py-2 bg-detikblue text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Kirim Komentar
-                </button>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-darkcolor text-2xl font-bold">Komentar ({comments.length + comments.reduce((acc, c) => acc + c.replies.length, 0)})</h3>
+              <div className="flex items-center gap-2">
+                <span className="text-textgray text-sm">Urutkan:</span>
+                <select className="border border-gray-300 rounded px-2 py-1 text-sm">
+                  <option>Terbaru</option>
+                  <option>Terpopuler</option>
+                  <option>Terlama</option>
+                </select>
               </div>
             </div>
 
-            {/* Sample Comments */}
+            {/* Comment Form */}
+            <form onSubmit={handleSubmitComment} className="bg-gray-50 rounded-lg p-6 mb-8">
+              <h4 className="text-darkcolor font-semibold mb-4">Tulis Komentar</h4>
+              <div className="flex gap-3 mb-4">
+                <div className="w-10 h-10 bg-detikblue rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-semibold text-sm">GU</span>
+                </div>
+                <div className="flex-1">
+                  <textarea
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    className="w-full h-24 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-detikblue focus:border-transparent"
+                    placeholder="Bagikan pendapat Anda tentang berita ini..."
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4 text-xs text-textgray">
+                  <span>💡 Gunakan bahasa yang sopan dan konstruktif</span>
+                </div>
+                <button
+                  type="submit"
+                  disabled={!newComment.trim()}
+                  className="px-6 py-2 bg-detikblue text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                >
+                  Kirim Komentar
+                </button>
+              </div>
+            </form>
+
+            {/* Comments List */}
             <div className="space-y-6">
-              {[
-                {
-                  name: "Ahmad Rizki",
-                  time: "2 jam yang lalu",
-                  comment: "Sangat disayangkan LINE Today ditutup. Padahal aplikasinya bagus dan interface-nya user friendly."
-                },
-                {
-                  name: "Sari Indah", 
-                  time: "3 jam yang lalu",
-                  comment: "Fokus ke fintech memang langkah yang tepat sih, mengingat potensi pasar fintech di Indonesia masih besar."
-                },
-                {
-                  name: "Budi Santoso",
-                  time: "5 jam yang lalu", 
-                  comment: "Semoga dengan fokus ke fintech, LINE bisa memberikan inovasi yang lebih baik untuk layanan keuangan digital."
-                }
-              ].map((comment, index) => (
-                <div key={index} className="flex gap-3">
-                  <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-semibold text-sm">{comment.name.charAt(0)}</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h5 className="text-darkcolor font-semibold text-sm">{comment.name}</h5>
-                      <span className="text-textgray-light text-xs">{comment.time}</span>
+              {comments.map((comment) => (
+                <div key={comment.id} className="border-b border-gray-100 pb-6 last:border-b-0">
+                  <div className="flex gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-white font-semibold text-sm">{comment.avatar}</span>
                     </div>
-                    <p className="text-darkcolor text-sm leading-relaxed">{comment.comment}</p>
-                    <div className="flex items-center gap-4 mt-2">
-                      <button className="text-textgray-light text-xs hover:text-detikblue">Balas</button>
-                      <button className="text-textgray-light text-xs hover:text-red-500">Laporkan</button>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h5 className="text-darkcolor font-semibold text-sm">{comment.name}</h5>
+                        <span className="text-textgray-light text-xs">{comment.time}</span>
+                        {comment.name === "Guest User" && (
+                          <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Anda</span>
+                        )}
+                      </div>
+                      <p className="text-darkcolor text-sm leading-relaxed mb-3">{comment.comment}</p>
+
+                      {/* Comment Actions */}
+                      <div className="flex items-center gap-6">
+                        <button
+                          onClick={() => handleLike(comment.id)}
+                          className={`flex items-center gap-1 text-xs transition-colors ${
+                            likedComments.has(comment.id)
+                              ? 'text-red-500'
+                              : 'text-textgray-light hover:text-red-500'
+                          }`}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill={likedComments.has(comment.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                          </svg>
+                          <span>{comment.likes}</span>
+                        </button>
+
+                        <button
+                          onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
+                          className="text-textgray-light text-xs hover:text-detikblue transition-colors"
+                        >
+                          Balas
+                        </button>
+
+                        <button className="text-textgray-light text-xs hover:text-orange-500 transition-colors">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M3 3l18 18M21 12a9 9 0 1 1-9-9m0 0V3m0 0l3 3m-3-3L9 6" />
+                          </svg>
+                          Laporkan
+                        </button>
+                      </div>
+
+                      {/* Reply Form */}
+                      {replyingTo === comment.id && (
+                        <form onSubmit={(e) => handleSubmitReply(comment.id, e)} className="mt-4 ml-0">
+                          <div className="flex gap-3">
+                            <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                              <span className="text-white font-semibold text-xs">GU</span>
+                            </div>
+                            <div className="flex-1">
+                              <textarea
+                                value={replyText}
+                                onChange={(e) => setReplyText(e.target.value)}
+                                className="w-full h-16 p-2 border border-gray-300 rounded text-sm resize-none focus:outline-none focus:ring-2 focus:ring-detikblue focus:border-transparent"
+                                placeholder={`Balas ${comment.name}...`}
+                                required
+                              ></textarea>
+                              <div className="flex justify-end gap-2 mt-2">
+                                <button
+                                  type="button"
+                                  onClick={() => {setReplyingTo(null); setReplyText('');}}
+                                  className="px-3 py-1 text-xs text-textgray border border-gray-300 rounded hover:bg-gray-50"
+                                >
+                                  Batal
+                                </button>
+                                <button
+                                  type="submit"
+                                  disabled={!replyText.trim()}
+                                  className="px-3 py-1 text-xs bg-detikblue text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+                                >
+                                  Balas
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      )}
+
+                      {/* Replies */}
+                      {comment.replies.length > 0 && (
+                        <div className="mt-4 space-y-4">
+                          {comment.replies.map((reply) => (
+                            <div key={reply.id} className="flex gap-3 ml-4 border-l-2 border-gray-100 pl-4">
+                              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span className="text-white font-semibold text-xs">{reply.avatar}</span>
+                              </div>
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <h6 className="text-darkcolor font-semibold text-xs">{reply.name}</h6>
+                                  <span className="text-textgray-light text-xs">{reply.time}</span>
+                                  {reply.name === "Guest User" && (
+                                    <span className="bg-green-100 text-green-800 text-xs px-1.5 py-0.5 rounded-full">Anda</span>
+                                  )}
+                                </div>
+                                <p className="text-darkcolor text-xs leading-relaxed mb-2">{reply.comment}</p>
+                                <div className="flex items-center gap-4">
+                                  <button
+                                    onClick={() => handleLike(reply.id, true, comment.id)}
+                                    className={`flex items-center gap-1 text-xs transition-colors ${
+                                      likedComments.has(`${comment.id}-${reply.id}`)
+                                        ? 'text-red-500'
+                                        : 'text-textgray-light hover:text-red-500'
+                                    }`}
+                                  >
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill={likedComments.has(`${comment.id}-${reply.id}`) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                    </svg>
+                                    <span>{reply.likes}</span>
+                                  </button>
+                                  <button className="text-textgray-light text-xs hover:text-orange-500">Laporkan</button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* Load More Comments */}
             <div className="text-center mt-8">
-              <button className="px-6 py-2 border border-gray-300 text-textgray rounded-lg hover:bg-gray-50 transition-colors">
+              <button className="px-6 py-3 border border-gray-300 text-textgray rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2 mx-auto">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
                 Muat Komentar Lainnya
               </button>
+            </div>
+
+            {/* Comment Guidelines */}
+            <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 className="text-detikblue font-semibold text-sm mb-2">Panduan Berkomentar:</h4>
+              <ul className="text-textgray text-xs space-y-1">
+                <li>• Gunakan bahasa yang sopan dan tidak menyinggung SARA</li>
+                <li>• Hindari spam, iklan, atau konten tidak relevan</li>
+                <li>• Berikan pendapat yang konstruktif dan berdasarkan fakta</li>
+                <li>• Hormati pendapat pengguna lain meskipun berbeda</li>
+              </ul>
             </div>
           </div>
         </article>
