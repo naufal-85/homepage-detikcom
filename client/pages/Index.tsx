@@ -66,7 +66,7 @@ const Index = () => {
         </div>
 
         {/* First row of categories */}
-        <div className="flex gap-4 mb-4 justify-center flex-wrap">
+        <div className="flex gap-2 md:gap-4 mb-4 justify-center flex-wrap overflow-x-auto md:overflow-visible pb-2">
           {[
             "https://api.builder.io/api/v1/image/assets/TEMP/f51d99ef73b95d20a147f51eef4742a3c0532f46?width=160",
             "https://api.builder.io/api/v1/image/assets/TEMP/5bcded3e7f622da641f4a21c89f0656eede42f49?width=160",
