@@ -2,7 +2,7 @@ import React from 'react';
 
 const Index = () => {
   return (
-    <div className="w-full max-w-[1440px] mx-auto bg-white font-['Inter'] text-sm">
+    <div className="w-full max-w-[1440px] mx-auto bg-white font-sans text-sm" style={{fontFamily: "'Inter', sans-serif"}}>
       {/* Hero Section */}
       <div className="relative w-full h-[400px] md:h-[586px] mt-10 md:mt-20 px-4 md:px-6">
         <div className="relative w-full max-w-[1392px] mx-auto h-[350px] md:h-[550px] rounded-2xl md:rounded-3xl overflow-hidden">
