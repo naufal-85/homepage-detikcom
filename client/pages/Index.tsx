@@ -139,9 +139,11 @@ const Index = () => {
                 <span className="text-white text-sm font-bold">DetikNews</span>
                 <span className="text-white text-sm">| Mei 14, 2022</span>
               </div>
-              <h3 className="text-white text-lg font-bold leading-normal">
-                KPK Dianggap Tak Jeli, Samin Tan Lolos dari Jeruji
-              </h3>
+              <Link to="/detail">
+                <h3 className="text-white text-lg font-bold leading-normal hover:underline cursor-pointer">
+                  KPK Dianggap Tak Jeli, Samin Tan Lolos dari Jeruji
+                </h3>
+              </Link>
             </div>
             <div className="absolute left-6 bottom-[18px] text-white text-xs">
               1 minggu yang lalu
