@@ -23,6 +23,22 @@ export default {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        detikblue: {
+          DEFAULT: "#244B9C",
+          light: "#D4E2FF",
+          lighter: "#E3ECFF",
+        },
+        detikred: {
+          DEFAULT: "#BF2026",
+          dark: "#850207",
+        },
+        darkcolor: {
+          DEFAULT: "#080F18",
+        },
+        textgray: {
+          DEFAULT: "#646464",
+          light: "#969696",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
