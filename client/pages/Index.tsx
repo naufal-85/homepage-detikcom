@@ -153,7 +153,7 @@ const Index = () => {
           {/* Latest News */}
           <h2 className="text-darkcolor text-2xl font-bold mb-6">Berita terkini</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          <div className="flex flex-row gap-6 mb-10 justify-start overflow-auto">
             {[
               {
                 image: "https://api.builder.io/api/v1/image/assets/TEMP/daa6d393c924e6fdb307cf9356338798bebdc77a?width=534",
