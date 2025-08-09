@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NewsDetail = () => {
   const [comments, setComments] = useState([
@@ -7,16 +7,18 @@ const NewsDetail = () => {
       id: 1,
       name: "Ahmad Rizki",
       time: "2 jam yang lalu",
-      comment: "Sangat disayangkan LINE Today ditutup. Padahal aplikasinya bagus dan interface-nya user friendly.",
+      comment:
+        "Sangat disayangkan LINE Today ditutup. Padahal aplikasinya bagus dan interface-nya user friendly.",
       avatar: "AR",
       likes: 12,
-      replies: []
+      replies: [],
     },
     {
       id: 2,
       name: "Sari Indah",
       time: "3 jam yang lalu",
-      comment: "Fokus ke fintech memang langkah yang tepat sih, mengingat potensi pasar fintech di Indonesia masih besar.",
+      comment:
+        "Fokus ke fintech memang langkah yang tepat sih, mengingat potensi pasar fintech di Indonesia masih besar.",
       avatar: "SI",
       likes: 8,
       replies: [
@@ -26,24 +28,25 @@ const NewsDetail = () => {
           time: "2 jam yang lalu",
           comment: "Setuju banget! Kompetisi fintech memang ketat sekarang.",
           avatar: "BS",
-          likes: 3
-        }
-      ]
+          likes: 3,
+        },
+      ],
     },
     {
       id: 3,
       name: "Budi Santoso",
       time: "5 jam yang lalu",
-      comment: "Semoga dengan fokus ke fintech, LINE bisa memberikan inovasi yang lebih baik untuk layanan keuangan digital.",
+      comment:
+        "Semoga dengan fokus ke fintech, LINE bisa memberikan inovasi yang lebih baik untuk layanan keuangan digital.",
       avatar: "BS",
       likes: 15,
-      replies: []
-    }
+      replies: [],
+    },
   ]);
 
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
   const [replyingTo, setReplyingTo] = useState(null);
-  const [replyText, setReplyText] = useState('');
+  const [replyText, setReplyText] = useState("");
   const [likedComments, setLikedComments] = useState(new Set());
 
   const handleSubmitComment = (e) => {
@@ -56,10 +59,10 @@ const NewsDetail = () => {
         comment: newComment,
         avatar: "GU",
         likes: 0,
-        replies: []
+        replies: [],
       };
       setComments([comment, ...comments]);
-      setNewComment('');
+      setNewComment("");
     }
   };
 
@@ -72,15 +75,17 @@ const NewsDetail = () => {
         time: "Baru saja",
         comment: replyText,
         avatar: "GU",
-        likes: 0
+        likes: 0,
       };
 
-      setComments(comments.map(comment =>
-        comment.id === commentId
-          ? { ...comment, replies: [...comment.replies, reply] }
-          : comment
-      ));
-      setReplyText('');
+      setComments(
+        comments.map((comment) =>
+          comment.id === commentId
+            ? { ...comment, replies: [...comment.replies, reply] }
+            : comment,
+        ),
+      );
+      setReplyText("");
       setReplyingTo(null);
     }
   };
@@ -97,34 +102,50 @@ const NewsDetail = () => {
     setLikedComments(newLikedComments);
 
     if (isReply) {
-      setComments(comments.map(comment =>
-        comment.id === parentId
-          ? {
-              ...comment,
-              replies: comment.replies.map(reply =>
-                reply.id === commentId
-                  ? { ...reply, likes: likedComments.has(likeKey) ? reply.likes - 1 : reply.likes + 1 }
-                  : reply
-              )
-            }
-          : comment
-      ));
+      setComments(
+        comments.map((comment) =>
+          comment.id === parentId
+            ? {
+                ...comment,
+                replies: comment.replies.map((reply) =>
+                  reply.id === commentId
+                    ? {
+                        ...reply,
+                        likes: likedComments.has(likeKey)
+                          ? reply.likes - 1
+                          : reply.likes + 1,
+                      }
+                    : reply,
+                ),
+              }
+            : comment,
+        ),
+      );
     } else {
-      setComments(comments.map(comment =>
-        comment.id === commentId
-          ? { ...comment, likes: likedComments.has(likeKey) ? comment.likes - 1 : comment.likes + 1 }
-          : comment
-      ));
+      setComments(
+        comments.map((comment) =>
+          comment.id === commentId
+            ? {
+                ...comment,
+                likes: likedComments.has(likeKey)
+                  ? comment.likes - 1
+                  : comment.likes + 1,
+              }
+            : comment,
+        ),
+      );
     }
   };
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto bg-white font-sans text-sm" style={{fontFamily: "'Inter', sans-serif"}}>
-      
+    <div
+      className="w-full max-w-[1440px] mx-auto bg-white font-sans text-sm"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
       {/* Publisher Logo */}
       <div className="flex justify-center items-center w-full max-w-[1140px] mx-auto mt-8 h-[80px] px-4">
-        <img 
-          src="https://api.builder.io/api/v1/image/assets/TEMP/c308d55f0f01eb08e6497b637b6ca912506d33fe?width=2280" 
+        <img
+          src="https://api.builder.io/api/v1/image/assets/TEMP/c308d55f0f01eb08e6497b637b6ca912506d33fe?width=2280"
           alt="Publisher logo"
           className="w-full max-w-[600px] h-[80px] object-contain"
         />
@@ -138,10 +159,17 @@ const NewsDetail = () => {
             "https://api.builder.io/api/v1/image/assets/TEMP/5bcded3e7f622da641f4a21c89f0656eede42f49?width=160",
             "https://api.builder.io/api/v1/image/assets/TEMP/01e73edd7248536a9f4f2059eb25b8a54b8f6779?width=160",
             "https://api.builder.io/api/v1/image/assets/TEMP/b911aa85cd15781e38f0b274d8533845ad0a80ab?width=160",
-            "https://api.builder.io/api/v1/image/assets/TEMP/e11da7820a25c5af72efdbf732941088e9131bc9?width=160"
+            "https://api.builder.io/api/v1/image/assets/TEMP/e11da7820a25c5af72efdbf732941088e9131bc9?width=160",
           ].map((src, index) => (
-            <div key={index} className="inline-flex p-1 md:p-2 px-2 md:px-3 justify-center items-center rounded-2xl md:rounded-3xl bg-white shadow-sm border border-gray-100 min-w-[80px] md:min-w-[100px] h-6 md:h-8 flex-shrink-0">
-              <img src={src} alt={`Category ${index + 1}`} className="w-[50px] md:w-[70px] h-[10px] md:h-[14px]" />
+            <div
+              key={index}
+              className="inline-flex p-1 md:p-2 px-2 md:px-3 justify-center items-center rounded-2xl md:rounded-3xl bg-white shadow-sm border border-gray-100 min-w-[80px] md:min-w-[100px] h-6 md:h-8 flex-shrink-0"
+            >
+              <img
+                src={src}
+                alt={`Category ${index + 1}`}
+                className="w-[50px] md:w-[70px] h-[10px] md:h-[14px]"
+              />
             </div>
           ))}
         </div>
@@ -150,12 +178,31 @@ const NewsDetail = () => {
         <div className="w-full max-w-[1140px] mx-auto h-14 rounded-xl bg-detikblue shadow-sm mt-6 mb-6 flex items-center px-4 gap-6">
           <div className="flex items-center gap-2">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M14.265 12.2775H3.375C2.9625 12.2775 2.625 11.94 2.625 11.5275V4.125C2.625 3.7125 2.9625 3.375 3.375 3.375H14.265C14.6775 3.375 15.015 3.7125 15.015 4.125V11.5275C15.015 11.9475 14.6775 12.2775 14.265 12.2775Z" stroke="white" strokeWidth="1.2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M10.5448 13.7626L10.2298 12.2776H7.4098L7.0948 13.7626C6.9673 14.3626 6.5173 14.8501 5.9248 15.0151H11.7148C11.1223 14.8426 10.6723 14.3626 10.5448 13.7626Z" stroke="white" strokeWidth="1.2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M14.265 12.2775H3.375C2.9625 12.2775 2.625 11.94 2.625 11.5275V4.125C2.625 3.7125 2.9625 3.375 3.375 3.375H14.265C14.6775 3.375 15.015 3.7125 15.015 4.125V11.5275C15.015 11.9475 14.6775 12.2775 14.265 12.2775Z"
+                stroke="white"
+                strokeWidth="1.2"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M10.5448 13.7626L10.2298 12.2776H7.4098L7.0948 13.7626C6.9673 14.3626 6.5173 14.8501 5.9248 15.0151H11.7148C11.1223 14.8426 10.6723 14.3626 10.5448 13.7626Z"
+                stroke="white"
+                strokeWidth="1.2"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             <span className="text-white text-sm font-semibold">Live TV</span>
             <div className="relative">
-              <svg width="6" height="6" viewBox="0 0 6 6" className="absolute -right-2 -top-1">
+              <svg
+                width="6"
+                height="6"
+                viewBox="0 0 6 6"
+                className="absolute -right-2 -top-1"
+              >
                 <circle cx="3" cy="3" r="2.5" fill="#FF3030" stroke="white" />
               </svg>
             </div>
@@ -166,7 +213,9 @@ const NewsDetail = () => {
       {/* Breadcrumbs */}
       <div className="w-full max-w-[1140px] mx-auto px-4 mb-6">
         <nav className="flex items-center gap-2 text-sm">
-          <Link to="/" className="text-detikblue hover:underline">Home</Link>
+          <Link to="/" className="text-detikblue hover:underline">
+            Home
+          </Link>
           <span className="text-textgray">/</span>
           <span className="text-detikblue">DetikNews</span>
           <span className="text-textgray">/</span>
@@ -176,10 +225,8 @@ const NewsDetail = () => {
 
       {/* Main Content */}
       <div className="w-full max-w-[1140px] mx-auto flex flex-col lg:flex-row gap-8 px-4">
-        
         {/* Article Content */}
         <article className="flex-1 max-w-[825px]">
-          
           {/* Article Header */}
           <div className="mb-6">
             <div className="flex items-center gap-4 mb-4">
@@ -192,13 +239,15 @@ const NewsDetail = () => {
                 <span>15:30 WIB</span>
               </div>
             </div>
-            
+
             <h1 className="text-darkcolor text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-4">
               LINE Today Tutup 6 Juli 2022, Mau Fokus di Fintech
             </h1>
-            
+
             <p className="text-textgray text-lg leading-relaxed mb-6">
-              LINE Indonesia mengumumkan akan menutup layanan berita LINE Today pada 6 Juli 2022. Perusahaan akan mengalihkan fokus ke layanan financial technology yang dinilai lebih potensial.
+              LINE Indonesia mengumumkan akan menutup layanan berita LINE Today
+              pada 6 Juli 2022. Perusahaan akan mengalihkan fokus ke layanan
+              financial technology yang dinilai lebih potensial.
             </p>
 
             {/* Author Info */}
@@ -207,7 +256,9 @@ const NewsDetail = () => {
                 <span className="text-white font-semibold text-sm">DN</span>
               </div>
               <div>
-                <p className="text-darkcolor font-semibold text-sm">DetikNews</p>
+                <p className="text-darkcolor font-semibold text-sm">
+                  DetikNews
+                </p>
                 <p className="text-textgray-light text-xs">Wartawan</p>
               </div>
             </div>
@@ -215,19 +266,22 @@ const NewsDetail = () => {
 
           {/* Featured Image */}
           <div className="mb-8">
-            <img 
+            <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/0a4b4556ca6f5689dd9c83f8de922a969221bd3a?width=2784"
               alt="LINE Today akan ditutup"
               className="w-full h-[300px] md:h-[400px] lg:h-[450px] object-cover rounded-lg"
             />
             <p className="text-textgray-light text-sm mt-2 italic">
-              Ilustrasi aplikasi LINE Today yang akan ditutup pada 6 Juli 2022. (Foto: LINE Indonesia)
+              Ilustrasi aplikasi LINE Today yang akan ditutup pada 6 Juli 2022.
+              (Foto: LINE Indonesia)
             </p>
           </div>
 
           {/* Social Share Buttons */}
           <div className="flex items-center gap-3 mb-8 pb-6 border-b border-gray-200">
-            <span className="text-darkcolor font-semibold text-sm mr-2">Bagikan:</span>
+            <span className="text-darkcolor font-semibold text-sm mr-2">
+              Bagikan:
+            </span>
             <button className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
               <span className="text-xs">f</span>
             </button>
@@ -245,15 +299,27 @@ const NewsDetail = () => {
           {/* Article Body */}
           <div className="prose prose-lg max-w-none">
             <p className="text-darkcolor text-base leading-relaxed mb-6">
-              <strong>Jakarta</strong> - LINE Indonesia resmi mengumumkan penutupan layanan berita LINE Today yang akan berlangsung pada 6 Juli 2022. Keputusan ini diambil sebagai bagian dari strategi perusahaan untuk fokus pada pengembangan layanan financial technology (fintech).
+              <strong>Jakarta</strong> - LINE Indonesia resmi mengumumkan
+              penutupan layanan berita LINE Today yang akan berlangsung pada 6
+              Juli 2022. Keputusan ini diambil sebagai bagian dari strategi
+              perusahaan untuk fokus pada pengembangan layanan financial
+              technology (fintech).
             </p>
 
             <p className="text-darkcolor text-base leading-relaxed mb-6">
-              Menurut keterangan resmi yang diterima detikINET, Selasa (14/5/2022), LINE Indonesia menyatakan bahwa penutupan LINE Today merupakan langkah strategis untuk mengalokasikan sumber daya secara lebih optimal pada layanan yang memiliki potensi pertumbuhan lebih besar.
+              Menurut keterangan resmi yang diterima detikINET, Selasa
+              (14/5/2022), LINE Indonesia menyatakan bahwa penutupan LINE Today
+              merupakan langkah strategis untuk mengalokasikan sumber daya
+              secara lebih optimal pada layanan yang memiliki potensi
+              pertumbuhan lebih besar.
             </p>
 
             <p className="text-darkcolor text-base leading-relaxed mb-6">
-              "Kami mengucapkan terima kasih kepada seluruh pengguna LINE Today yang telah setia menggunakan layanan kami. Keputusan ini bukanlah hal yang mudah, namun kami perlu fokus pada layanan fintech yang memiliki prospek lebih cerah di masa depan," ungkap spokesperson LINE Indonesia.
+              "Kami mengucapkan terima kasih kepada seluruh pengguna LINE Today
+              yang telah setia menggunakan layanan kami. Keputusan ini bukanlah
+              hal yang mudah, namun kami perlu fokus pada layanan fintech yang
+              memiliki prospek lebih cerah di masa depan," ungkap spokesperson
+              LINE Indonesia.
             </p>
 
             <h3 className="text-darkcolor text-xl font-bold mb-4 mt-8">
@@ -261,11 +327,17 @@ const NewsDetail = () => {
             </h3>
 
             <p className="text-darkcolor text-base leading-relaxed mb-6">
-              LINE Indonesia akan mengalihkan fokus penuh pada pengembangan LINE Bank dan layanan pembayaran digital lainnya. Perusahaan melihat potensi besar pada sektor fintech di Indonesia yang terus mengalami pertumbuhan signifikan.
+              LINE Indonesia akan mengalihkan fokus penuh pada pengembangan LINE
+              Bank dan layanan pembayaran digital lainnya. Perusahaan melihat
+              potensi besar pada sektor fintech di Indonesia yang terus
+              mengalami pertumbuhan signifikan.
             </p>
 
             <p className="text-darkcolor text-base leading-relaxed mb-6">
-              Pengguna LINE Today masih dapat mengakses layanan hingga tanggal 6 Juli 2022. Setelah itu, seluruh konten dan fitur akan dihentikan secara permanen. LINE menyarankan pengguna untuk mencari alternatif platform berita lainnya.
+              Pengguna LINE Today masih dapat mengakses layanan hingga tanggal 6
+              Juli 2022. Setelah itu, seluruh konten dan fitur akan dihentikan
+              secara permanen. LINE menyarankan pengguna untuk mencari
+              alternatif platform berita lainnya.
             </p>
 
             <h3 className="text-darkcolor text-xl font-bold mb-4 mt-8">
@@ -273,11 +345,16 @@ const NewsDetail = () => {
             </h3>
 
             <p className="text-darkcolor text-base leading-relaxed mb-6">
-              Penutupan LINE Today tentu memberikan dampak bagi jutaan pengguna yang telah terbiasa mengonsumsi berita melalui platform tersebut. LINE menyediakan periode transisi selama hampir dua bulan untuk memberikan waktu adaptasi bagi pengguna.
+              Penutupan LINE Today tentu memberikan dampak bagi jutaan pengguna
+              yang telah terbiasa mengonsumsi berita melalui platform tersebut.
+              LINE menyediakan periode transisi selama hampir dua bulan untuk
+              memberikan waktu adaptasi bagi pengguna.
             </p>
 
             <p className="text-darkcolor text-base leading-relaxed mb-8">
-              Meski demikian, aplikasi LINE utama tetap akan beroperasi normal dengan seluruh fitur komunikasi yang ada. Penutupan hanya berlaku untuk layanan LINE Today saja.
+              Meski demikian, aplikasi LINE utama tetap akan beroperasi normal
+              dengan seluruh fitur komunikasi yang ada. Penutupan hanya berlaku
+              untuk layanan LINE Today saja.
             </p>
           </div>
 
@@ -285,9 +362,18 @@ const NewsDetail = () => {
           <div className="border-t border-gray-200 pt-6 mb-8">
             <h4 className="text-darkcolor font-semibold mb-3">Tag:</h4>
             <div className="flex flex-wrap gap-2">
-              {['LINE Today', 'Fintech', 'Aplikasi Berita', 'LINE Indonesia', 'Teknologi'].map((tag, index) => (
-                <span key={index} className="px-3 py-1 bg-gray-100 text-textgray text-sm rounded-full hover:bg-gray-200 cursor-pointer">
-                  #{tag.toLowerCase().replace(' ', '')}
+              {[
+                "LINE Today",
+                "Fintech",
+                "Aplikasi Berita",
+                "LINE Indonesia",
+                "Teknologi",
+              ].map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-gray-100 text-textgray text-sm rounded-full hover:bg-gray-200 cursor-pointer"
+                >
+                  #{tag.toLowerCase().replace(" ", "")}
                 </span>
               ))}
             </div>
@@ -295,25 +381,32 @@ const NewsDetail = () => {
 
           {/* Related Articles */}
           <div className="border-t border-gray-200 pt-8">
-            <h3 className="text-darkcolor text-2xl font-bold mb-6">Berita Terkait</h3>
+            <h3 className="text-darkcolor text-2xl font-bold mb-6">
+              Berita Terkait
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  image: "https://api.builder.io/api/v1/image/assets/TEMP/daa6d393c924e6fdb307cf9356338798bebdc77a?width=534",
-                  title: "Aplikasi Berita Lokal Mulai Bermunculan Setelah LINE Today Tutup",
-                  excerpt: "Penutupan LINE Today membuka peluang bagi aplikasi berita lokal untuk mengisi kekosongan pasar...",
-                  time: "2 jam yang lalu"
+                  image:
+                    "https://api.builder.io/api/v1/image/assets/TEMP/daa6d393c924e6fdb307cf9356338798bebdc77a?width=534",
+                  title:
+                    "Aplikasi Berita Lokal Mulai Bermunculan Setelah LINE Today Tutup",
+                  excerpt:
+                    "Penutupan LINE Today membuka peluang bagi aplikasi berita lokal untuk mengisi kekosongan pasar...",
+                  time: "2 jam yang lalu",
                 },
                 {
-                  image: "https://api.builder.io/api/v1/image/assets/TEMP/2726f9666437d51cd4ab114844e7e132e10b6010?width=536",
+                  image:
+                    "https://api.builder.io/api/v1/image/assets/TEMP/2726f9666437d51cd4ab114844e7e132e10b6010?width=536",
                   title: "LINE Bank Siap Ekspansi Layanan Fintech di Indonesia",
-                  excerpt: "Setelah menutup LINE Today, LINE Indonesia berkomitmen penuh mengembangkan sektor fintech...",
-                  time: "4 jam yang lalu"
-                }
+                  excerpt:
+                    "Setelah menutup LINE Today, LINE Indonesia berkomitmen penuh mengembangkan sektor fintech...",
+                  time: "4 jam yang lalu",
+                },
               ].map((article, index) => (
                 <div key={index} className="w-full">
-                  <img 
-                    src={article.image} 
+                  <img
+                    src={article.image}
                     alt={article.title}
                     className="w-full h-[150px] rounded-lg object-cover mb-4"
                   />
@@ -323,7 +416,9 @@ const NewsDetail = () => {
                   <p className="text-textgray text-sm leading-5 line-clamp-2 mb-2">
                     {article.excerpt}
                   </p>
-                  <span className="text-textgray-light text-xs">{article.time}</span>
+                  <span className="text-textgray-light text-xs">
+                    {article.time}
+                  </span>
                 </div>
               ))}
             </div>
@@ -332,7 +427,12 @@ const NewsDetail = () => {
           {/* Comments Section */}
           <div className="border-t border-gray-200 pt-8 mt-8">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-darkcolor text-2xl font-bold">Komentar ({comments.length + comments.reduce((acc, c) => acc + c.replies.length, 0)})</h3>
+              <h3 className="text-darkcolor text-2xl font-bold">
+                Komentar (
+                {comments.length +
+                  comments.reduce((acc, c) => acc + c.replies.length, 0)}
+                )
+              </h3>
               <div className="flex items-center gap-2">
                 <span className="text-textgray text-sm">Urutkan:</span>
                 <select className="border border-gray-300 rounded px-2 py-1 text-sm">
@@ -344,8 +444,13 @@ const NewsDetail = () => {
             </div>
 
             {/* Comment Form */}
-            <form onSubmit={handleSubmitComment} className="bg-gray-50 rounded-lg p-6 mb-8">
-              <h4 className="text-darkcolor font-semibold mb-4">Tulis Komentar</h4>
+            <form
+              onSubmit={handleSubmitComment}
+              className="bg-gray-50 rounded-lg p-6 mb-8"
+            >
+              <h4 className="text-darkcolor font-semibold mb-4">
+                Tulis Komentar
+              </h4>
               <div className="flex gap-3 mb-4">
                 <div className="w-10 h-10 bg-detikblue rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-semibold text-sm">GU</span>
@@ -377,20 +482,33 @@ const NewsDetail = () => {
             {/* Comments List */}
             <div className="space-y-6">
               {comments.map((comment) => (
-                <div key={comment.id} className="border-b border-gray-100 pb-6 last:border-b-0">
+                <div
+                  key={comment.id}
+                  className="border-b border-gray-100 pb-6 last:border-b-0"
+                >
                   <div className="flex gap-3">
                     <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-white font-semibold text-sm">{comment.avatar}</span>
+                      <span className="text-white font-semibold text-sm">
+                        {comment.avatar}
+                      </span>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <h5 className="text-darkcolor font-semibold text-sm">{comment.name}</h5>
-                        <span className="text-textgray-light text-xs">{comment.time}</span>
+                        <h5 className="text-darkcolor font-semibold text-sm">
+                          {comment.name}
+                        </h5>
+                        <span className="text-textgray-light text-xs">
+                          {comment.time}
+                        </span>
                         {comment.name === "Guest User" && (
-                          <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Anda</span>
+                          <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">
+                            Anda
+                          </span>
                         )}
                       </div>
-                      <p className="text-darkcolor text-sm leading-relaxed mb-3">{comment.comment}</p>
+                      <p className="text-darkcolor text-sm leading-relaxed mb-3">
+                        {comment.comment}
+                      </p>
 
                       {/* Comment Actions */}
                       <div className="flex items-center gap-6">
@@ -398,25 +516,47 @@ const NewsDetail = () => {
                           onClick={() => handleLike(comment.id)}
                           className={`flex items-center gap-1 text-xs transition-colors ${
                             likedComments.has(comment.id)
-                              ? 'text-red-500'
-                              : 'text-textgray-light hover:text-red-500'
+                              ? "text-red-500"
+                              : "text-textgray-light hover:text-red-500"
                           }`}
                         >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill={likedComments.has(comment.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill={
+                              likedComments.has(comment.id)
+                                ? "currentColor"
+                                : "none"
+                            }
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                           </svg>
                           <span>{comment.likes}</span>
                         </button>
 
                         <button
-                          onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
+                          onClick={() =>
+                            setReplyingTo(
+                              replyingTo === comment.id ? null : comment.id,
+                            )
+                          }
                           className="text-textgray-light text-xs hover:text-detikblue transition-colors"
                         >
                           Balas
                         </button>
 
                         <button className="text-textgray-light text-xs hover:text-orange-500 transition-colors">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M3 3l18 18M21 12a9 9 0 1 1-9-9m0 0V3m0 0l3 3m-3-3L9 6" />
                           </svg>
                           Laporkan
@@ -425,10 +565,15 @@ const NewsDetail = () => {
 
                       {/* Reply Form */}
                       {replyingTo === comment.id && (
-                        <form onSubmit={(e) => handleSubmitReply(comment.id, e)} className="mt-4 ml-0">
+                        <form
+                          onSubmit={(e) => handleSubmitReply(comment.id, e)}
+                          className="mt-4 ml-0"
+                        >
                           <div className="flex gap-3">
                             <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-                              <span className="text-white font-semibold text-xs">GU</span>
+                              <span className="text-white font-semibold text-xs">
+                                GU
+                              </span>
                             </div>
                             <div className="flex-1">
                               <textarea
@@ -441,7 +586,10 @@ const NewsDetail = () => {
                               <div className="flex justify-end gap-2 mt-2">
                                 <button
                                   type="button"
-                                  onClick={() => {setReplyingTo(null); setReplyText('');}}
+                                  onClick={() => {
+                                    setReplyingTo(null);
+                                    setReplyText("");
+                                  }}
                                   className="px-3 py-1 text-xs text-textgray border border-gray-300 rounded hover:bg-gray-50"
                                 >
                                   Batal
@@ -463,34 +611,66 @@ const NewsDetail = () => {
                       {comment.replies.length > 0 && (
                         <div className="mt-4 space-y-4">
                           {comment.replies.map((reply) => (
-                            <div key={reply.id} className="flex gap-3 ml-4 border-l-2 border-gray-100 pl-4">
+                            <div
+                              key={reply.id}
+                              className="flex gap-3 ml-4 border-l-2 border-gray-100 pl-4"
+                            >
                               <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span className="text-white font-semibold text-xs">{reply.avatar}</span>
+                                <span className="text-white font-semibold text-xs">
+                                  {reply.avatar}
+                                </span>
                               </div>
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-1">
-                                  <h6 className="text-darkcolor font-semibold text-xs">{reply.name}</h6>
-                                  <span className="text-textgray-light text-xs">{reply.time}</span>
+                                  <h6 className="text-darkcolor font-semibold text-xs">
+                                    {reply.name}
+                                  </h6>
+                                  <span className="text-textgray-light text-xs">
+                                    {reply.time}
+                                  </span>
                                   {reply.name === "Guest User" && (
-                                    <span className="bg-green-100 text-green-800 text-xs px-1.5 py-0.5 rounded-full">Anda</span>
+                                    <span className="bg-green-100 text-green-800 text-xs px-1.5 py-0.5 rounded-full">
+                                      Anda
+                                    </span>
                                   )}
                                 </div>
-                                <p className="text-darkcolor text-xs leading-relaxed mb-2">{reply.comment}</p>
+                                <p className="text-darkcolor text-xs leading-relaxed mb-2">
+                                  {reply.comment}
+                                </p>
                                 <div className="flex items-center gap-4">
                                   <button
-                                    onClick={() => handleLike(reply.id, true, comment.id)}
+                                    onClick={() =>
+                                      handleLike(reply.id, true, comment.id)
+                                    }
                                     className={`flex items-center gap-1 text-xs transition-colors ${
-                                      likedComments.has(`${comment.id}-${reply.id}`)
-                                        ? 'text-red-500'
-                                        : 'text-textgray-light hover:text-red-500'
+                                      likedComments.has(
+                                        `${comment.id}-${reply.id}`,
+                                      )
+                                        ? "text-red-500"
+                                        : "text-textgray-light hover:text-red-500"
                                     }`}
                                   >
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill={likedComments.has(`${comment.id}-${reply.id}`) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                                    <svg
+                                      width="12"
+                                      height="12"
+                                      viewBox="0 0 24 24"
+                                      fill={
+                                        likedComments.has(
+                                          `${comment.id}-${reply.id}`,
+                                        )
+                                          ? "currentColor"
+                                          : "none"
+                                      }
+                                      stroke="currentColor"
+                                      strokeWidth="2"
+                                    >
                                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                     </svg>
                                     <span>{reply.likes}</span>
                                   </button>
-                                  <button className="text-textgray-light text-xs hover:text-orange-500">Laporkan</button>
+                                  <button className="text-textgray-light text-xs hover:text-orange-500">
+                                    Laporkan
+                                  </button>
                                 </div>
                               </div>
                             </div>
@@ -506,7 +686,14 @@ const NewsDetail = () => {
             {/* Load More Comments */}
             <div className="text-center mt-8">
               <button className="px-6 py-3 border border-gray-300 text-textgray rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2 mx-auto">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M12 5v14M5 12l7 7 7-7" />
                 </svg>
                 Muat Komentar Lainnya
@@ -515,11 +702,15 @@ const NewsDetail = () => {
 
             {/* Comment Guidelines */}
             <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h4 className="text-detikblue font-semibold text-sm mb-2">Panduan Berkomentar:</h4>
+              <h4 className="text-detikblue font-semibold text-sm mb-2">
+                Panduan Berkomentar:
+              </h4>
               <ul className="text-textgray text-xs space-y-1">
                 <li>• Gunakan bahasa yang sopan dan tidak menyinggung SARA</li>
                 <li>• Hindari spam, iklan, atau konten tidak relevan</li>
-                <li>• Berikan pendapat yang konstruktif dan berdasarkan fakta</li>
+                <li>
+                  • Berikan pendapat yang konstruktif dan berdasarkan fakta
+                </li>
                 <li>• Hormati pendapat pengguna lain meskipun berbeda</li>
               </ul>
             </div>
@@ -528,11 +719,12 @@ const NewsDetail = () => {
 
         {/* Sidebar */}
         <aside className="w-full lg:w-[350px] lg:max-w-[350px] mt-8 lg:mt-0">
-          
           {/* Popular News */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
-            <h3 className="text-detikblue text-xl font-bold mb-4">Berita Terpopuler</h3>
-            
+            <h3 className="text-detikblue text-xl font-bold mb-4">
+              Berita Terpopuler
+            </h3>
+
             <div className="space-y-4">
               {[1, 2, 3, 4, 5].map((num) => (
                 <div key={num} className="flex gap-3">
@@ -541,7 +733,8 @@ const NewsDetail = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-darkcolor text-sm font-semibold leading-5 mb-1 line-clamp-3">
-                      Beda Versi Ayu Thalia Vs Nicholas Sean di Sidang soal Tidur Bareng
+                      Beda Versi Ayu Thalia Vs Nicholas Sean di Sidang soal
+                      Tidur Bareng
                     </h4>
                     <div className="text-textgray-light text-xs">
                       detikNews • 1 jam yang lalu
@@ -554,20 +747,67 @@ const NewsDetail = () => {
 
           {/* Most Comments */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
-            <h3 className="text-detikblue text-xl font-bold mb-4">Komentar Terbanyak</h3>
-            
+            <h3 className="text-detikblue text-xl font-bold mb-4">
+              Komentar Terbanyak
+            </h3>
+
             <div className="space-y-4">
               {[
-                { title: "Anggota DPR Geram Ada Usaha Kuliner Nasi Padang Babi di Jakarta", comments: "185 komentar" },
-                { title: "Jokowi Naik Mobil Listrik Hyundai, Roy Suryo Sindir Begini", comments: "125 komentar" },
-                { title: "Roy Suryo: Sama Sekali Tidak Ada Niat Hina Simbol Negara", comments: "106 komentar" }
+                {
+                  title:
+                    "Anggota DPR Geram Ada Usaha Kuliner Nasi Padang Babi di Jakarta",
+                  comments: "185 komentar",
+                },
+                {
+                  title:
+                    "Jokowi Naik Mobil Listrik Hyundai, Roy Suryo Sindir Begini",
+                  comments: "125 komentar",
+                },
+                {
+                  title:
+                    "Roy Suryo: Sama Sekali Tidak Ada Niat Hina Simbol Negara",
+                  comments: "106 komentar",
+                },
               ].map((item, index) => (
                 <div key={index} className="flex gap-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" className="mt-1 flex-shrink-0" fill="none">
-                    <path d="M13.0599 10.42H8.27994" stroke="#244B9C" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M15.5699 13.71H10.2799" stroke="#244B9C" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M17.93 17.94C21.6 14.27 21.16 8.05002 16.62 4.99002C13.79 3.08002 9.97001 3.14002 7.19001 5.11002C3.35001 7.83002 2.59001 12.87 4.91001 16.51L3.83001 19.19C3.58001 19.8 4.19001 20.41 4.81001 20.17L7.49001 19.09C10.73 21.16 15.09 20.78 17.93 17.94Z" stroke="#244B9C" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="18" cy="6" r="3" fill="#FF3030" stroke="white" />
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    className="mt-1 flex-shrink-0"
+                    fill="none"
+                  >
+                    <path
+                      d="M13.0599 10.42H8.27994"
+                      stroke="#244B9C"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M15.5699 13.71H10.2799"
+                      stroke="#244B9C"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M17.93 17.94C21.6 14.27 21.16 8.05002 16.62 4.99002C13.79 3.08002 9.97001 3.14002 7.19001 5.11002C3.35001 7.83002 2.59001 12.87 4.91001 16.51L3.83001 19.19C3.58001 19.8 4.19001 20.41 4.81001 20.17L7.49001 19.09C10.73 21.16 15.09 20.78 17.93 17.94Z"
+                      stroke="#244B9C"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <circle
+                      cx="18"
+                      cy="6"
+                      r="3"
+                      fill="#FF3030"
+                      stroke="white"
+                    />
                   </svg>
                   <div className="flex-1">
                     <h4 className="text-darkcolor text-sm font-semibold leading-5 mb-2 line-clamp-3">
@@ -589,18 +829,23 @@ const NewsDetail = () => {
             </div>
             <p className="text-textgray-light text-xs">Sponsored Content</p>
           </div>
-
         </aside>
       </div>
 
       {/* Back to Top */}
       <div className="text-center py-8">
-        <Link 
+        <Link
           to="/"
           className="inline-flex items-center gap-2 px-6 py-3 bg-detikblue text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 15V1M8 1L1 8M8 1L15 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path
+              d="M8 15V1M8 1L1 8M8 1L15 8"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           Kembali ke Beranda
         </Link>
