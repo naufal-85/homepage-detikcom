@@ -617,7 +617,7 @@ const Index = () => {
       <div className="w-full max-w-[1140px] mx-auto mt-10 px-4">
         <h2 className="text-darkcolor text-2xl font-bold mb-6 text-center">Foto Terpopuler</h2>
         
-        <div className="flex w-full relative">
+        <div className="flex w-full relative overflow-x-auto md:overflow-visible">
           {[
             {
               image: "https://api.builder.io/api/v1/image/assets/TEMP/01521fe9af85b5130bd8517ce99c52530af66e22?width=382",
