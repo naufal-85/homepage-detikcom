@@ -2,6 +2,122 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const NewsDetail = () => {
+  const [comments, setComments] = useState([
+    {
+      id: 1,
+      name: "Ahmad Rizki",
+      time: "2 jam yang lalu",
+      comment: "Sangat disayangkan LINE Today ditutup. Padahal aplikasinya bagus dan interface-nya user friendly.",
+      avatar: "AR",
+      likes: 12,
+      replies: []
+    },
+    {
+      id: 2,
+      name: "Sari Indah",
+      time: "3 jam yang lalu",
+      comment: "Fokus ke fintech memang langkah yang tepat sih, mengingat potensi pasar fintech di Indonesia masih besar.",
+      avatar: "SI",
+      likes: 8,
+      replies: [
+        {
+          id: 21,
+          name: "Budi Santoso",
+          time: "2 jam yang lalu",
+          comment: "Setuju banget! Kompetisi fintech memang ketat sekarang.",
+          avatar: "BS",
+          likes: 3
+        }
+      ]
+    },
+    {
+      id: 3,
+      name: "Budi Santoso",
+      time: "5 jam yang lalu",
+      comment: "Semoga dengan fokus ke fintech, LINE bisa memberikan inovasi yang lebih baik untuk layanan keuangan digital.",
+      avatar: "BS",
+      likes: 15,
+      replies: []
+    }
+  ]);
+
+  const [newComment, setNewComment] = useState('');
+  const [replyingTo, setReplyingTo] = useState(null);
+  const [replyText, setReplyText] = useState('');
+  const [likedComments, setLikedComments] = useState(new Set());
+
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+    if (newComment.trim()) {
+      const comment = {
+        id: Date.now(),
+        name: "Guest User",
+        time: "Baru saja",
+        comment: newComment,
+        avatar: "GU",
+        likes: 0,
+        replies: []
+      };
+      setComments([comment, ...comments]);
+      setNewComment('');
+    }
+  };
+
+  const handleSubmitReply = (commentId, e) => {
+    e.preventDefault();
+    if (replyText.trim()) {
+      const reply = {
+        id: Date.now(),
+        name: "Guest User",
+        time: "Baru saja",
+        comment: replyText,
+        avatar: "GU",
+        likes: 0
+      };
+
+      setComments(comments.map(comment =>
+        comment.id === commentId
+          ? { ...comment, replies: [...comment.replies, reply] }
+          : comment
+      ));
+      setReplyText('');
+      setReplyingTo(null);
+    }
+  };
+
+  const handleLike = (commentId, isReply = false, parentId = null) => {
+    const likeKey = isReply ? `${parentId}-${commentId}` : commentId;
+    const newLikedComments = new Set(likedComments);
+
+    if (likedComments.has(likeKey)) {
+      newLikedComments.delete(likeKey);
+    } else {
+      newLikedComments.add(likeKey);
+    }
+    setLikedComments(newLikedComments);
+
+    if (isReply) {
+      setComments(comments.map(comment =>
+        comment.id === parentId
+          ? {
+              ...comment,
+              replies: comment.replies.map(reply =>
+                reply.id === commentId
+                  ? { ...reply, likes: likedComments.has(likeKey) ? reply.likes - 1 : reply.likes + 1 }
+                  : reply
+              )
+            }
+          : comment
+      ));
+    } else {
+      setComments(comments.map(comment =>
+        comment.id === commentId
+          ? { ...comment, likes: likedComments.has(likeKey) ? comment.likes - 1 : comment.likes + 1 }
+          : comment
+      ));
+    }
+  };
+
   return (
     <div className="w-full max-w-[1440px] mx-auto bg-white font-sans text-sm" style={{fontFamily: "'Inter', sans-serif"}}>
       
