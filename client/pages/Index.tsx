@@ -120,7 +120,7 @@ const Index = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="w-full max-w-[1140px] mx-auto mt-10 flex gap-6 px-4">
+      <div className="w-full max-w-[1140px] mx-auto mt-10 flex flex-col lg:flex-row gap-6 px-4">
         {/* Left Content */}
         <div className="flex-1 max-w-[825px]">
           {/* Featured Article */}
