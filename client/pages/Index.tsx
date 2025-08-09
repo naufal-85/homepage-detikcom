@@ -652,8 +652,8 @@ const Index = () => {
               isLast: true
             }
           ].map((photo, index) => (
-            <div key={index} className="relative">
-              <div className={`w-[190px] h-[266px] bg-gray-300 relative overflow-hidden ${photo.isFirst ? 'rounded-l-lg' : photo.isLast ? 'rounded-r-lg' : ''}`}>
+            <div key={index} className="relative flex-shrink-0">
+              <div className={`w-[160px] md:w-[190px] h-[220px] md:h-[266px] bg-gray-300 relative overflow-hidden ${photo.isFirst ? 'rounded-l-lg' : photo.isLast ? 'rounded-r-lg' : ''}`}>
                 <img src={photo.image} alt={photo.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80" />
                 <div className="absolute left-3 bottom-8 max-w-[163px]">
